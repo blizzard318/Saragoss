@@ -1,0 +1,17 @@
+{
+  "theme_color": "purple",
+  "background_color": "purple",
+  "description": "Saragoss Game",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "Icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "name": "Slider",
+  "short_name": "Slider",
+  "start_url": "./index.html"
+}
