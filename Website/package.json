@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Cloudflare Pages project with Supabase",
   "main": "index.js",
+  "type": "module",
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
   }
-  "type": "module"
 }
