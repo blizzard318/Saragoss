@@ -2,8 +2,7 @@ name: Update Weather Daily
 
 on:
   schedule:
-    #- cron: "0 16 * * *"  # Runs daily at midnight UTC
-    - cron: "38 2 * * *" 
+    - cron: "0 16 * * *"  # Runs daily at midnight UTC
 
 jobs:
   update-weather:
