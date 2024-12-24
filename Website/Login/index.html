@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Saragoss</title>
+<meta name='theme-color' content='black'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name='description' content='Saragoss Login'>
+<link rel='stylesheet' href='../style.css'>
+<link rel='shortcut icon' href='../favicon.ico'>
+<script src='../darkmode.js'></script>
+</head>
+
+<style>
+input[type=text], input[type=password] {
+  width: 95%;
+  padding: 10px;
+  margin: 5px 0 20px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+button {
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  float: left;
+  width: 50%;
+}
+
+button:hover {
+  opacity:1;
+}
+
+.greenbtn {
+  background-color: #04AA6D;
+}
+
+.bluebtn {
+  background-color: #2196F3;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+  width: 700px;  
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #ccc;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+@media screen and (max-width: 300px) {
+  button {
+     width: 100%;
+  }
+}
+</style>
+
+<body>
+<span style='float:right;display:inline-block;height:0px'>
+<label for='darkmode'>Dark Mode</label>
+<input type='checkbox' id='darkmode'>
+</span>
+
+  <div class="container"  id="login">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+        
+	<br/>
+    <button type="button" class="greenbtn" onclick="login()">Login</button>
+	<br/>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+  
+  <div class="container" id="register" style="display:none">
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+
+    <label for="email"><b>Email</b></label>
+    <input type="email" placeholder="Enter Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    
+    <div class="clearfix">
+      <button type="button" class="bluebtn" onclick="toggle()">Log In</button>
+      <button type="button" class="greenbtn" onclick="register()">Register</button>
+    </div>
+  </div>
+
+<br/><br/><br/><i style='font-size:10px;line-height:0'>Disclaimer: The registered trademarks and other intellectual property related to Ravenloft and owned by TSR, Arthaus, White Wolf SSI and/or Wizards of the Coast are used for the purpose of identification only. This site is not affiliated with/or endorsed by these manufacturers.</i>
+</body>
+
+<script>init();</script>
+</html>
