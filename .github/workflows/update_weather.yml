@@ -1,8 +1,6 @@
 name: Update Weather Daily
 
 on:
-  push: #remove this later, just testing.
-
   schedule:
     - cron: "0 16 * * *"
 
