@@ -9,19 +9,21 @@
 <link rel='stylesheet' href='../style.css'>
 <link rel='shortcut icon' href='../favicon.ico'>
 <script src='../darkmode.js'></script>
+<script src='toggle.js'></script>
 </head>
 
 <style>
-input[type=text], input[type=password] {
+input[type=email], input[type=password] {
   width: 95%;
   padding: 10px;
   margin: 5px 0 20px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
+  color: black
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=email]:focus, input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
@@ -58,7 +60,7 @@ button:hover {
 /* Add padding to container elements */
 .container {
   padding: 16px;
-  width: 700px;  
+  width: 500px;  
   max-width: fit-content;
   margin-left: auto;
   margin-right: auto;
@@ -85,19 +87,25 @@ button:hover {
 <input type='checkbox' id='darkmode'>
 </span>
 
-  <div class="container"  id="login">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+  <div class="container" id="login">
+    <h1>Log In</h1>
+    <p>Please log into your account.</p>
+    <hr>
+	
+    <label for="login-email"><b>Email</b></label>
+    <input type="email" placeholder="Enter Email" id="login-email" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <label for="login-pw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="login-pw" required>
         
-	<br/>
-    <button type="button" class="greenbtn" onclick="login()">Login</button>
-	<br/>
     <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
+      <input type="checkbox" checked="checked" id="remember"> Remember me
     </label>
+	
+    <div class="clearfix">
+		<button type="button" class="bluebtn" onclick="toggle()">Register</button>
+		<button type="button" class="greenbtn" onclick="login()">Login</button>
+    </div>
   </div>
   
   <div class="container" id="register" style="display:none">
@@ -105,15 +113,17 @@ button:hover {
     <p>Please fill in this form to create an account.</p>
     <hr>
 
-    <label for="email"><b>Email</b></label>
-    <input type="email" placeholder="Enter Email" name="email" required>
+    <label for="reg-email"><b>Email</b></label>
+    <input type="email" placeholder="Enter Email" id="reg-email" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <label for="reg-pw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="reg-pw" required>
 
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    <label for="reg-rpw"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" id="reg-rpw" required>
     
+    <p style="color:red;display:none" id="pw-match">Passwords do not match.</p>
+	
     <div class="clearfix">
       <button type="button" class="bluebtn" onclick="toggle()">Log In</button>
       <button type="button" class="greenbtn" onclick="register()">Register</button>

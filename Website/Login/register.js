@@ -1,6 +1,10 @@
   async function register() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const password = document.getElementById('reg-pw').value;
+    const rpassword = document.getElementById('reg-rpw').value;
+	
+	document.getElementById('pw-match').style.display = (password === rpassword) ? "none" : "block";
+	
+    const email = document.getElementById('reg-email').value;
 
     const response = await fetch('/register', {
       method: 'POST',
