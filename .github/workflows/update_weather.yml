@@ -22,3 +22,14 @@ jobs:
       # Step 3: Run the weather generation script
       - name: Generate Weather
         run: node GenerateWeather.js
+
+      # Step 4: Commit Changes
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add weather.txt
+          git commit -m "Update weather data"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
