@@ -1,0 +1,25 @@
+name: Update Weather Daily
+
+on:
+  schedule:
+    #- cron: "0 16 * * *"  # Runs daily at midnight UTC
+    - cron: "35 2 * * *" 
+
+jobs:
+  update-weather:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"  # Use a stable version of Node.js
+
+      # Step 3: Run the weather generation script
+      - name: Generate Weather
+        run: node GenerateWeather.js
