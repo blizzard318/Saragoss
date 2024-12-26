@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+/*import { createClient } from '@supabase/supabase-js';
 
 export async function onRequest(context) {
   const { email, password } = await context.request.json();
@@ -16,4 +16,4 @@ export async function onRequest(context) {
   return new Response(JSON.stringify({ message: 'Login successful', user: data.user }), {
     headers: { 'Content-Type': 'application/json' },
   });
-}
+}*/
