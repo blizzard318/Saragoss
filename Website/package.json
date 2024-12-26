@@ -1,5 +1,5 @@
 {
-  "name": "Saragoss",
+  "name": "saragoss",
   "version": "1.0.0",
   "description": "Cloudflare Pages project with Supabase",
   "main": "index.js",
