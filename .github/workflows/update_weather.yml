@@ -3,6 +3,7 @@ name: Update Weather Daily
 on:
   schedule:
     - cron: "0 16 * * *"
+  push
 
 jobs:
   update-weather:
@@ -26,7 +27,6 @@ jobs:
       # Step 4: Commit Changes
       - name: Commit and push changes
         run: |
-          git pull origin main
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add Website/weather.txt
