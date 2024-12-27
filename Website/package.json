@@ -2,8 +2,6 @@
   "name": "saragoss",
   "version": "1.0.0",
   "description": "Cloudflare Pages project with Supabase",
-  "main": "index.js",
-  "type": "module",
   "dependencies": {
     "@supabase/supabase-js": "^2.47.10"
   },
