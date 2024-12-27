@@ -24,11 +24,13 @@
     <p>Please log into your account.</p>
     <hr>
 	
-    <label for="login-email"><b>Email</b></label>
-    <input type="email" placeholder="Enter Email" id="login-email" required>
+	<form>
+		<label for="login-email"><b>Email</b></label>
+		<input type="email" placeholder="Enter Email" id="login-email" required>
 
-    <label for="login-pw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" id="login-pw" required>
+		<label for="login-pw"><b>Password</b></label>
+		<input type="password" placeholder="Enter Password" id="login-pw" required>
+	</form>
         
     <label>
       <input type="checkbox" checked="checked" id="remember"> Remember me
@@ -45,14 +47,16 @@
     <p>Please fill in this form to create an account.</p>
     <hr>
 
-    <label for="reg-email"><b>Email</b></label>
-    <input type="email" placeholder="Enter Email" id="reg-email" required>
+	<form>
+		<label for="reg-email"><b>Email</b></label>
+		<input type="email" placeholder="Enter Email" id="reg-email" required>
 
-    <label for="reg-pw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" id="reg-pw" required>
+		<label for="reg-pw"><b>Password</b></label>
+		<input type="password" placeholder="Enter Password" id="reg-pw" required>
 
-    <label for="reg-rpw"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" id="reg-rpw" required>
+		<label for="reg-rpw"><b>Repeat Password</b></label>
+		<input type="password" placeholder="Repeat Password" id="reg-rpw" required>
+	</form>
     
     <p style="color:red;display:none" id="pw-match">Passwords do not match.</p>
 	
@@ -60,6 +64,8 @@
       <button type="button" class="bluebtn" onclick="toggle()">Log In</button>
       <button type="button" class="greenbtn" onclick="register()">Register</button>
     </div>
+	
+    <p style="display:none" id="email-confirm">Please confirm your email to login.</p>
   </div>
 
 <br/><br/><br/><i style='font-size:10px;line-height:0'>Disclaimer: The registered trademarks and other intellectual property related to Ravenloft and owned by TSR, Arthaus, White Wolf SSI and/or Wizards of the Coast are used for the purpose of identification only. This site is not affiliated with/or endorsed by these manufacturers.</i>

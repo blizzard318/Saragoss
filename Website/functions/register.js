@@ -15,5 +15,6 @@ export async function onRequestPost(context) {
 
   return new Response(JSON.stringify({ message: 'Registration successful', user }), {
     headers: { 'Content-Type': 'application/json' },
+	status: 201,
   });
 }
