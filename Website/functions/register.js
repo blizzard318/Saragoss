@@ -1,10 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = context.env.SUPABASE_URL;
-const supabaseKey = context.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
 export async function onRequestPost(context) {
+  const supabaseUrl = context.env.SUPABASE_URL;
+  const supabaseKey = context.env.SUPABASE_KEY;
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
   const { email, password } = await context.request.json();
   
   const { user, error } = await supabase.auth.signUp({ email, password });
