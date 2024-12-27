@@ -7,11 +7,79 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name='description' content='Saragoss Login'>
 <link rel='stylesheet' href='../style.css'>
-<link rel='stylesheet' href='style.css'>
 <link rel='shortcut icon' href='../favicon.ico'>
 <script src='../darkmode.js'></script>
-<script src='login.js'></script>
+<script src='toggle.js'></script>
 </head>
+
+<style>
+input[type=email], input[type=password] {
+  width: 95%;
+  padding: 10px;
+  margin: 5px 0 20px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  color: black
+}
+
+input[type=email]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+button {
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  float: left;
+  width: 50%;
+}
+
+button:hover {
+  opacity:1;
+}
+
+.greenbtn {
+  background-color: #04AA6D;
+}
+
+.bluebtn {
+  background-color: #2196F3;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+  width: 500px;  
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #ccc;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+@media screen and (max-width: 300px) {
+  button {
+     width: 100%;
+  }
+}
+</style>
 
 <body>
 <span style='float:right;display:inline-block;height:0px'>
