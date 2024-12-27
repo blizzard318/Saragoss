@@ -1,2 +1,13 @@
-weather.txt
+# 86400 seconds is 24 hours.
+/*
   Cache-Control: public, max-age=86400
+  Access-Control-Allow-Origin: https://saragoss.pages.dev/
+  Access-Control-Allow-Methods: POST, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization
+  Access-Control-Allow-Credentials: true
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: no-referrer-when-downgrade
+  Content-Language: en
