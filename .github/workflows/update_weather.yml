@@ -28,8 +28,8 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add Website/weather.txt || echo "No changes to commit"
-          git commit -m "Update weather data" || echo "Nothing to commit"
+          git add Website/weather.txt
+          git commit -m "Update weather data"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
