@@ -26,10 +26,10 @@
 	
 	<form>
 		<label for="login-email"><b>Email</b></label>
-		<input type="email" placeholder="Enter Email" id="login-email" required>
+		<input type="email" autocomplete="email" placeholder="Enter Email" id="login-email" required>
 
 		<label for="login-pw"><b>Password</b></label>
-		<input type="password" placeholder="Enter Password" id="login-pw" required>
+		<input type="password" autocomplete="current-password" placeholder="Enter Password" id="login-pw" required>
 	</form>
         
     <label>
@@ -49,13 +49,13 @@
 
 	<form>
 		<label for="reg-email"><b>Email</b></label>
-		<input type="email" placeholder="Enter Email" id="reg-email" required>
+		<input type="email" autocomplete="email" placeholder="Enter Email" id="reg-email" required>
 
 		<label for="reg-pw"><b>Password</b></label>
-		<input type="password" placeholder="Enter Password" id="reg-pw" required>
+		<input type="password" autocomplete="new-password" placeholder="Enter Password" id="reg-pw" required>
 
 		<label for="reg-rpw"><b>Repeat Password</b></label>
-		<input type="password" placeholder="Repeat Password" id="reg-rpw" required>
+		<input type="password" autocomplete="new-password" placeholder="Repeat Password" id="reg-rpw" required>
 	</form>
     
     <p style="color:red;display:none" id="pw-match">Passwords do not match.</p>
