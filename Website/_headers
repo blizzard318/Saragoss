@@ -11,4 +11,3 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: no-referrer-when-downgrade
   Content-Language: en
-  Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline';
