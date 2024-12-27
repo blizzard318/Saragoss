@@ -4,7 +4,7 @@ const supabaseUrl = context.env.SUPABASE_URL;
 const supabaseKey = context.env.SUPABASE_PRIVATE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-export async function onRequest(context) {
+export async function onRequestPost(context) {
   const { email, password } = await context.request.json();
 
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
