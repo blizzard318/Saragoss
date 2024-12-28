@@ -3,7 +3,6 @@ name: Update Weather Daily
 on:
   schedule:
     - cron: "0 16 * * *"
-  push:
 
 jobs:
   update-weather:
