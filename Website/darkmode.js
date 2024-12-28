@@ -1,5 +1,5 @@
-function init() {
-    if (!sessionStorage.getItem('darkmode') && window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches)
+document.addEventListener('DOMContentLoaded', (event) => {
+   if (!sessionStorage.getItem('darkmode') && window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches)
         sessionStorage.setItem('darkmode', true);
 
     SetDarkMode(sessionStorage.getItem('darkmode') === 'true');
@@ -15,6 +15,4 @@ function init() {
 
     const tables = document.querySelectorAll('table');
     tables.forEach(table => colorCode(table));
-}
-
-document.addEventListener('DOMContentLoaded', init);
+});
