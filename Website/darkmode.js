@@ -16,3 +16,5 @@ function init() {
     const tables = document.querySelectorAll('table');
     tables.forEach(table => colorCode(table));
 }
+
+document.addEventListener('DOMContentLoaded', init);
