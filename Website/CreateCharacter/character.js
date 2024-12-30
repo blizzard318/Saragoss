@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	  dropdown.appendChild(option);
 	});
 
-	const response = await fetch('/character', {
+	const response = await fetch('/API/character', {
 	  method: 'GET',
 	  headers: { 'Content-Type': 'application/json' },
 	});
@@ -40,7 +40,7 @@ async function CreateCharacter(){
 	const name = document.getElementById('char-name').value;
 	const ship = document.getElementById('ShipDropdown').value;
 	
-	const response = await fetch('/character', {
+	const response = await fetch('/API/character', {
 	  method: 'PUT',
 	  body: JSON.stringify({ name, ship }),
 	  headers: { 'Content-Type': 'application/json' },
