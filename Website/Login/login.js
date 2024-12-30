@@ -16,7 +16,7 @@ async function login() {
 	const email = document.getElementById('login-email').value;
 	const password = document.getElementById('login-pw').value;
 
-	const response = await fetch('/login', {
+	const response = await fetch('/API/login', {
 	  method: 'GET',
 	  body: JSON.stringify({ email, password }),
 	  headers: { 'Content-Type': 'application/json' },
@@ -47,7 +47,7 @@ async function register() {
 		
 		const email = document.getElementById('reg-email').value;
 
-		const response = await fetch('/login', {
+		const response = await fetch('/API/login', {
 		  method: 'POST',
 		  body: JSON.stringify({ email, password }),
 		  headers: { 'Content-Type': 'application/json' },
