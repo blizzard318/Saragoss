@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset='utf-8'>
-<title>Saragoss</title>
-<meta name='theme-color' content='black'>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name='description' content='Saragoss Login'>
-<link rel='stylesheet' href='../style.css'>
-<link rel='shortcut icon' href='../favicon.ico'>
-<script src='../darkmode.js'></script>
-<script src='toggle.js'></script>
+	<meta charset='utf-8'>
+	<title>Saragoss</title>
+	<meta name='theme-color' content='black'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name='description' content='Saragoss Login'>
+	<link rel='stylesheet' href='../style.css'>
+	<link rel='stylesheet' href='style.css'>
+	<link rel='shortcut icon' href='../favicon.ico'>
+	<script src='../darkmode.js'></script>
+	<script src='character.js'></script>
 </head>
 
 <body>
@@ -18,25 +19,22 @@
 <input type='checkbox' id='darkmode'>
 </span>
 
-  <div>
-    <h1>Register</h1>
-    <p>Please fill in this form to create an account.</p>
+  <div class="container">
+    <h1>Create Character</h1>
     <hr>
 
-    <label for="reg-email"><b>Email</b></label>
-    <input type="email" placeholder="Enter Email" id="reg-email" required>
-
-    <label for="reg-pw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" id="reg-pw" required>
-
-    <label for="reg-rpw"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" id="reg-rpw" required>
-    
-    <p style="color:red;display:none" id="pw-match">Passwords do not match.</p>
+	<form>
+		<label for="char-name"><b>Character Name</b></label>
+		<input type="text" placeholder="Character Name" id="char-name" required>
+		
+		<label for="ShipDropdown"><b>Choose a ship</b></label>
+		<select id="ShipDropdown">
+			<option value="" disabled selected>Loading...</option>
+		</select>
+	</form>
 	
     <div class="clearfix">
-      <button type="button" class="bluebtn" onclick="toggle()">Log In</button>
-      <button type="button" class="greenbtn" onclick="register()">Register</button>
+      <button type="button" class="greenbtn" onclick="CreateCharacter()">Create Character</button>
     </div>
   </div>
 

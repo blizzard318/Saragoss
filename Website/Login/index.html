@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset='utf-8'>
-<title>Saragoss</title>
-<meta name='theme-color' content='black'>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name='description' content='Saragoss Login'>
-<link rel='stylesheet' href='../style.css'>
-<link rel='stylesheet' href='style.css'>
-<link rel='shortcut icon' href='../favicon.ico'>
-<script src='../darkmode.js'></script>
-<script src='login.js'></script>
+	<meta charset='utf-8'>
+	<title>Saragoss</title>
+	<meta name='theme-color' content='black'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name='description' content='Saragoss Login'>
+	<link rel='stylesheet' href='../style.css'>
+	<link rel='stylesheet' href='style.css'>
+	<link rel='shortcut icon' href='../favicon.ico'>
+	<script src='../darkmode.js'></script>
+	<script src='login.js'></script>
 </head>
 
 <body>
@@ -31,10 +31,8 @@
 		<label for="login-pw"><b>Password</b></label>
 		<input type="password" autocomplete="current-password" placeholder="Enter Password" id="login-pw" required>
 	</form>
-        
-    <label>
-      <input type="checkbox" checked="checked" id="remember"> Remember me
-    </label>
+	
+    <p style="color:red;display:none" id="login-error">Email or Password incorrect.</p>
 	
     <div class="clearfix">
 		<button type="button" class="bluebtn" onclick="toggle()">Register</button>

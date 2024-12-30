@@ -1,4 +1,11 @@
-input[type=email], input[type=password], type[type=text] {
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 20px 0;
+  display: inline-block;
+}
+
+input[type=email], input[type=password], input[type=text] {
   width: 95%;
   padding: 10px;
   margin: 5px 0 20px 0;
@@ -8,7 +15,7 @@ input[type=email], input[type=password], type[type=text] {
   color: black
 }
 
-input[type=email]:focus, input[type=password]:focus, type[type=text]:focus {
+input[type=email]:focus, input[type=password]:focus, input[type=text]:focus {
   background-color: #ddd;
   outline: none;
 }
