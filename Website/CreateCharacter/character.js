@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  try {
 	const response = await fetch('../ships.csv');
-	if (!response.ok) throw new Error('Failed to fetch CSV file');
 
+	if (response.ok){
 	const csvText = await response.text();
 	const [...data] = csvText.split(',');
 
@@ -14,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	  option.value = option.textContent = value;
 	  dropdown.appendChild(option);
 	});
+ }
 
 	const response = await fetch('/API/character', {
 	  method: 'GET',
@@ -30,10 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			document.getElementById('ShipDropdown').value = character.ship;
 			break;
 	}
-  } catch (error) {
-	console.error('Error loading dropdown:', error);
-	alert('Failed to load dropdown options');
-  }
 });
 
 async function CreateCharacter(){
