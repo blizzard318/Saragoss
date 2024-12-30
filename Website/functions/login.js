@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 
 export async function onRequestGet(context) { //Login
   const supabaseUrl = context.env.SUPABASE_URL;
-  const supabaseKey = context.env.SUPABASE_PRIVATE_KEY;
+  const supabaseKey = context.env.SUPABASE_KEY;
   const supabase = createClient(supabaseUrl, supabaseKey);
   
   const { email, password } = await context.request.json();
