@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const csvText = await response.text();
 	const [...data] = csvText.split(',');
 
-	const dropdown = document.getElementById('dynamicDropdown');
+	const dropdown = document.getElementById('ShipDropdown');
 	dropdown.innerHTML = '';
 
 	data.forEach((value) => {
