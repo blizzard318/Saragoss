@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+document.getElementById('test').innerHTML = "Pre-fetch";
 	const response = await fetch('../ships.csv');
+document.getElementById('test').innerHTML = "Post-fetch";
 
 	if (response.ok){
 	const csvText = await response.text();
@@ -14,7 +16,9 @@ document.getElementById('test').innerHTML = csvText;
 	  option.value = option.textContent = value;
 	  dropdown.appendChild(option);
 	});
- }
+ }else{
+document.getElementById('test').innerHTML = "response fail";
+}
 
 	const response = await fetch('/API/character', {
 	  method: 'GET',
