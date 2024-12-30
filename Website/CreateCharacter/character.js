@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+document.getElementById('ShipDropdown').innerHTML = '';
 	const response = await fetch('../ships.csv');
 
 	if (response.ok){
@@ -13,9 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	  option.value = option.textContent = value;
 	  dropdown.appendChild(option);
 	});
- }else{
-document.getElementById('ShipDropdown').innerHTML = '';
-}
+ }
 
 	const response = await fetch('/API/character', {
 	  method: 'GET',
