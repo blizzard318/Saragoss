@@ -36,7 +36,7 @@ export async function onRequestPut(context) { //Create Character
   const { name, ship } = await context.request.json();
 if (!name || !ship) return new Response("Missing name or ship", { status: 400 });
   
-  const CurrentDate = new Date();
+  const CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Singapore"}));
   const Year = CurrentDate.getFullYear();
   const Month = CurrentDate.getMonth() + 1;
   const Day = CurrentDate.getDate();
