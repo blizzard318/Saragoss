@@ -13,9 +13,16 @@ if (!email || !password) return new Response("Missing Email or Password", { stat
     return new Response(error.message, { status: 400 });
   }
 
-  const CreateCharacter = ctx.env.keyvalue.get(data.user.id) == null;
+let name = null;
+let ship = null;
+  const character = await ctx.env.keyvalue.get(data.user.id);
+if (character){
+const [...details] = character.split(',');
+name = details[1];
+ship = details[2];
+}
 
-  return new Response(JSON.stringify({ message: 'Login Successful', uuid: data.user.id, CreateCharacter: CreateCharacter}), {
+  return new Response(JSON.stringify({ message: 'Login Successful', uuid: data.user.id, name: name, ship: ship}), {
     headers: { 'Content-Type': 'application/json' },
     status: 200,
   });
@@ -35,7 +42,7 @@ if (!email || !password) return new Response("Missing Email or Password", { stat
   }
 
   return new Response(JSON.stringify({ message: 'Registration Successful' }), {
-    headers: { 'Content-Type': 'application/json', uuid: user.id },
+    headers: { 'Content-Type': 'application/json' },
 	status: 201,
   });
 }
