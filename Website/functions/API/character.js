@@ -34,6 +34,7 @@ export async function onRequestPut(context) { //Create Character
   }
   
   const { name, ship } = await context.request.json();
+if (!name || !ship) return new Response("Missing name or ship", { status: 400 });
   
   const CurrentDate = new Date();
   const Year = CurrentDate.getFullYear();
