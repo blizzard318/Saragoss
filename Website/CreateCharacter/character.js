@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async (event) => {
 document.getElementById('test').innerHTML = 'pre-fetch';
 	const csvresponse = await fetch('../ships.csv');
 document.getElementById('test').innerHTML = 'post-fetch';
