@@ -24,7 +24,7 @@ if (sessionStorage.getItem("name")){
 	  headers: { 'Content-Type': 'application/json' },
 	});
 	switch (response.status) {
-		case 400:
+		case 401:
 			window.location.replace("../Login");
 			break;
 		case 200:
@@ -48,9 +48,12 @@ async function CreateCharacter(){
 	});
 
 	switch (response.status) {
-		case 400:
+		case 401:
 			window.location.replace("../Login");
 			break;
+case 400:
+    document.getElementById('incomplete').style.display = 'block';
+break;
 		case 200: //successful change
 			sessionStorage.setItem("name", name);
    sessionStorage.setItem("ship", ship);
