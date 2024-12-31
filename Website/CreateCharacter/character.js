@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
-	const response = await fetch('../ships.csv');
+	const csvresponse = await fetch('../ships.csv');
 
-	if (response.ok){
-	const csvText = await response.text();
+	if (csvresponse.ok){
+	const csvText = await csvresponse.text();
 	const [...data] = csvText.split(',');
 
 	const dropdown = document.getElementById('ShipDropdown');
