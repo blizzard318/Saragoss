@@ -6,6 +6,7 @@ export async function onRequestGet(context) { //Login
   const supabase = createClient(supabaseUrl, supabaseKey);
   
   const { email, password } = await context.request.json();
+if (!email || !password) return new Response("Missing Email or Password", { status: 400 });
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
@@ -26,6 +27,7 @@ export async function onRequestPost(context) { //Register
   const supabase = createClient(supabaseUrl, supabaseKey);
   
   const { email, password } = await context.request.json();
+if (!email || !password) return new Response("Missing Email or Password", { status: 400 });
   const { user, error } = await supabase.auth.signUp({ email, password });
 
   if (error) {
