@@ -1,16 +1,21 @@
 import { createClient } from '@supabase/supabase-js';
 
 export async function onRequestGet(context) { //Get Character
-  const supabaseUrl = context.env.SUPABASE_URL;
+  const { uuid } = await context.request.json();
+ if (!uuid){
+const supabaseUrl = context.env.SUPABASE_URL;
   const supabaseKey = context.env.SUPABASE_KEY;
   const supabase = createClient(supabaseUrl, supabaseKey);
+
   const { data, error } = await supabase.auth.getUser();
   
   if (error) {
     return new Response(error.message, { status: 401 });
   }
+uuid = data.user.id;
+}
   
-  const character = await ctx.env.keyvalue.get(data.user.id);
+  const character = await ctx.env.keyvalue.get(uuid);
   if (character != null) {
 	  const [...data] = character.split(',');
 	  const name = data[1];
