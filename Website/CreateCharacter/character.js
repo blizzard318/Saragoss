@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
+document.getElementById('ShipDropdown').innerHTML = 'pre-fetch';
 	const csvresponse = await fetch('../ships.csv');
+document.getElementById('ShipDropdown').innerHTML = 'post-fetch';
 
 	if (csvresponse.ok){
 	const csvText = await csvresponse.text();
+document.getElementById('ShipDropdown').innerHTML = csvText;
 	const [...data] = csvText.split(',');
 
 	const dropdown = document.getElementById('ShipDropdown');
@@ -13,7 +16,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 	  option.value = option.textContent = value;
 	  dropdown.appendChild(option);
 	});
- }
+ }else{
+document.getElementById('ShipDropdown').innerHTML = 'not okay';
+}
 
 	const response = await fetch('/API/character', {
 	  method: 'GET',
