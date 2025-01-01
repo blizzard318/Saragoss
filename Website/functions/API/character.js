@@ -17,15 +17,19 @@ uuid = data.user.id;
 }
   
   const character = await ctx.env.keyvalue.get(uuid);
-  if (character != null) {
+  if (character) {
 	  const [...data] = character.split(',');
 	  const name = data[1];
 	  const ship = data[2];
-  }
-  
-  return new Response(JSON.stringify({ message: 'GET Successful', name: name, ship: ship}), {
+return new Response(JSON.stringify({ message: 'GET Successful', name: name, ship: ship}), {
     headers: { 'Content-Type': 'application/json' },
     status: 200,
+  });
+  }
+  
+  return new Response(JSON.stringify({ message: 'GET Unsuccessful'}), {
+    headers: { 'Content-Type': 'application/json' },
+    status: 404,
   });
 }
 
