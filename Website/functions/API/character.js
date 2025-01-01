@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 
 export async function onRequestGet(context) { //Get Character
   const data = await context.request.json();
-const uuid = data.uuid;
+let uuid = data.uuid;
  if (!uuid){
 const supabaseUrl = context.env.SUPABASE_URL;
   const supabaseKey = context.env.SUPABASE_KEY;
