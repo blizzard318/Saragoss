@@ -19,9 +19,9 @@ jobs:
         with:
           node-version: "16.x"  # Use a stable version of Node.js
 
-      # Step 3: Run the weather generation script
-      - name: Generate Weather
-        run: node GenerateWeather.js
+      # Step 3: Run the turn over script
+      - name: Turn Over
+        run: node TurnOver.js
 
       # Step 4: Commit Changes
       - name: Commit and push changes
