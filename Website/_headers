@@ -11,3 +11,7 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: no-referrer-when-downgrade
   Content-Language: en
+
+/API/GithubActions
+WWW-Authenticate: Basic
+realm="GitHub Action"
