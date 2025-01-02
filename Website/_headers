@@ -12,6 +12,6 @@
   Referrer-Policy: no-referrer-when-downgrade
   Content-Language: en
 
-/API/GithubActions
+/API/GithubAction
 WWW-Authenticate: Basic
 realm="GitHub Action"
