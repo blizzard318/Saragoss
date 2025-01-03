@@ -17,7 +17,7 @@ uuid = data.user.id;
 }
   
   const character = await ctx.env.keyvalue.get(uuid);
-  if (character) {
+  if (ship) {
 	  const [...data] = character.split(',');
 	  const name = data[1];
 	  const ship = data[2];
