@@ -13,5 +13,4 @@
   Content-Language: en
 
 /API/GithubAction
-WWW-Authenticate: Basic
-realm="GitHub Action"
+WWW-Authenticate: Bearer
