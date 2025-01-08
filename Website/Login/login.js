@@ -15,10 +15,11 @@ function toggle() {
 async function login() {
 	const email = document.getElementById('login-email').value;
 	const password = document.getElementById('login-pw').value;
+	const method = 'login';
 
 	const response = await fetch('/API/login', {
-	  method: 'GET',
-	  body: JSON.stringify({ email, password }),
+	  method: 'POST',
+	  body: JSON.stringify({ email, password, method }),
 	  headers: { 'Content-Type': 'application/json' },
 	});
 
@@ -32,15 +33,16 @@ async function login() {
 			const result = await response.json();
 			console.log(result);  // Handle the response (e.g., success or error message)
 			sessionStorage.putItem("uuid", result.uuid);
-sessionStorage.putItem("name", result.name);
-sessionStorage.putItem("ship", result.ship);
-			window.location.href = !result.name ? "../CreateCharacter" : "../Game";
+			sessionStorage.putItem("name", result.name);
+			sessionStorage.putItem("ship", result.ship);
+			window.location.href = !result.ship ? "../CreateCharacter" : "../Game";
 			break;
 	}
 }
 async function register() {
 	const  password = document.getElementById('reg-pw' ).value;
 	const rpassword = document.getElementById('reg-rpw').value;
+	const method = 'register';
 
 	if (password !== rpassword){
 		document.getElementById('pw-match').style.display = "block";
@@ -51,7 +53,7 @@ async function register() {
 
 		const response = await fetch('/API/login', {
 		  method: 'POST',
-		  body: JSON.stringify({ email, password }),
+		  body: JSON.stringify({ email, password, method }),
 		  headers: { 'Content-Type': 'application/json' },
 		});
 
