@@ -19,8 +19,14 @@ jobs:
         with:
           node-version: "16.x"  # Use a stable version of Node.js
 
+      # Step 2: Install Dependencies
+      - name: Install Dependencies
+        run: nom install @tsndr/cloudflare-worker-jwt
+
       # Step 3: Run the turn over script
       - name: Turn Over
+        env:
+          JWT_SECRET: {{ secrets.JWT_SECRET }}
         run: node TurnOver.js
 
       # Step 4: Commit Changes
