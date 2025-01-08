@@ -1,11 +1,18 @@
 const fs = require("fs");
 const path = require("path");
+import jwt from "@tsndr/cloudflare-worker-jwt"
 
+const token = await jwt.sign({
+        nbf: Math.floor(Date.now() / 1000),      // Not before: Now
+        exp: Math.floor(Date.now() / 1000) + (5 * 60) // Expires: Now + 5min
+    }, process.env.JWT_SECRET);
 
 const response = await fetch('/API/GithubAction', {
-  method: 'POST',
-  body: JSON.stringify({ jwt }),
-  headers: { 'Content-Type': 'text/csv' },
+  method: 'GET',
+  headers: {
+    'Content-Type': 'text/csv',
+    'Authorization': 'Bearer ${token}'
+  },
 });
 
 const weatherOptions = ["Cold", "Foggy", "Hot", "Stormy", "Windy", "Calm"];
