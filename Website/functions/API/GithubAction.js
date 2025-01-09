@@ -24,7 +24,7 @@ export async function onRequestGet(context) {
 	fetch(`https://api.cloudflare.com/client/v4/accounts/${context.env.CLOUDFLARE_ID}/storage/kv/namespaces/${verifiedToken.payload.KV_ID}`, {
 	  method: 'DELETE',
 	  headers: {
-		`Authorization': 'Bearer ${CLOUDFLARE_TOKEN}`
+		`Authorization': 'Bearer ${context.env.CLOUDFLARE_TOKEN}`
 	  }
 	});//lmao I don't really know what to do if this fails.
 	
