@@ -32,7 +32,7 @@ jobs:
       # Step 4: Commit Changes
       - name: Commit and push changes
         run: |
-          git config user.name "GitHub Actions"
+          git config user.name "Draga Salt-Biter"
           git config user.email "actions@github.com"
           git add Website/weather.txt
           git commit -m "New Day, New Turn"

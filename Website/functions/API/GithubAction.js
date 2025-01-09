@@ -5,5 +5,10 @@ export async function onRequestGet(context) {
         sub: "1234",
         name: "John Doe",
         email: "john.doe@gmail.com"
-    }, "secret")
+    }, "secret");
+	
+	return new Response(JSON.stringify(numbers),{
+		headers: { 'Content-Type': 'application/json' },
+		status: 200,
+	});
 }

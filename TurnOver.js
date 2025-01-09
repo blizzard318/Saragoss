@@ -10,7 +10,7 @@ const token = await jwt.sign({
 const response = await fetch('/API/GithubAction', {
   method: 'GET',
   headers: {
-    'Content-Type': 'text/csv',
+    'Content-Type': 'application/json',
     'Authorization': 'Bearer ${token}'
   },
 });
