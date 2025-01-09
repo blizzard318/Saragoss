@@ -51,12 +51,12 @@ async function CreateCharacter(){
 		case 401:
 			window.location.replace("../Login");
 			break;
-case 400:
-    document.getElementById('incomplete').style.display = 'block';
-break;
+		case 400:
+			document.getElementById('incomplete').style.display = 'block';
+		break;
 		case 200: //successful change
 			sessionStorage.setItem("name", name);
-   sessionStorage.setItem("ship", ship);
+			sessionStorage.setItem("ship", ship);
 			break;
 	}
 }

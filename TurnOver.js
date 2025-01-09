@@ -1,18 +1,28 @@
-const fs = require("fs");
-const path = require("path");
-import jwt from "@tsndr/cloudflare-worker-jwt"
+import fs from 'fs';
+import path from 'path';
+import jwt from "@tsndr/cloudflare-worker-jwt";
 
 const token = await jwt.sign({
-        nbf: Math.floor(Date.now() / 1000),      // Not before: Now
-        exp: Math.floor(Date.now() / 1000) + (5 * 60) // Expires: Now + 5min
-    }, process.env.JWT_SECRET);
+	KV_ID: process.env.KV_ID;
+	nbf: Math.floor(Date.now() / 1000),      // Not before: Now
+	exp: Math.floor(Date.now() / 1000) + (5 * 60) // Expires: Now + 5min
+}, process.env.JWT_SECRET);
 
 const response = await fetch('/API/GithubAction', {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer ${token}'
+    `Authorization': 'Bearer ${token}`
   },
+});
+
+const { KV_ID } = await response.json();
+fs.appendFile(process.env.GITHUB_ENV, `KV_ID=${KV_ID}`, (err) => {
+  if (err) {
+    console.error('Error writing to GITHUB_ENV file:', err);
+    process.exit(1);
+  }
+  console.log(`Successfully updated ${existingVariableName} to: ${newValue}`);
 });
 
 const weatherOptions = ["Cold", "Foggy", "Hot", "Stormy", "Windy", "Calm"];

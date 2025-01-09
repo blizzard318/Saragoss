@@ -23,7 +23,7 @@ export async function onRequestPost(context) { //Register or login
         ship = details[2];
       }
 
-      body = JSON.stringify({ message: 'Login Successful', uuid: data.user.id, name: name, ship: ship});
+      body = JSON.stringify({ message: 'Login Successful', uuid: data.user.id, name: name, ship: ship });
       init = {
         headers: { 'Content-Type': 'application/json' },
         status: 200,
