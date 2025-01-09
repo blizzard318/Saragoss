@@ -3,7 +3,7 @@ name: Update to New Turn
 on:
   schedule:
     - cron: "0 16 * * *"
-  push: #comment this out later on.
+  [push] #comment this out later on.
   
 jobs:
   update-weather:
