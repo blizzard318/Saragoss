@@ -29,7 +29,8 @@ jobs:
       # Step 4: Run the turn over script
       - name: Turn Over
         env:
-          JWT_SECRET: {{ secrets.JWT_SECRET }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          KV_ID: ${{ env.KV_ID }}
         run: node TurnOver.js
 
       # Step 5: Commit Changes
@@ -42,4 +43,3 @@ jobs:
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          KV_ID: ${{ env.KV_ID }}
