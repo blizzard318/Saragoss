@@ -24,7 +24,7 @@ jobs:
 
       # Step 3: Install Dependencies
       - name: Install Dependencies
-        run: npm install @tsndr/cloudflare-worker-jwt
+        run: npm ci
 
       # Step 4: Run the turn over script
       - name: Turn Over
