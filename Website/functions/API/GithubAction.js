@@ -1,4 +1,4 @@
-import { jwt } from '@tsndr/cloudflare-worker-jwt';
+import jwt from '@tsndr/cloudflare-worker-jwt';
 
 export async function onRequestGet(context) {
 	const token = await jwt.sign({
