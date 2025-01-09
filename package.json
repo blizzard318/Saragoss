@@ -1,0 +1,8 @@
+{
+  "name": "turn-over-script",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@tsndr/cloudflare-worker-jwt": "^1.0.0"
+  }
+}
