@@ -3,7 +3,9 @@ name: Update to New Turn
 on:
   schedule:
     - cron: "0 16 * * *"
-  [push] #comment this out later on.
+  push:
+    branches:
+      - main
   
 jobs:
   update-weather:
@@ -33,7 +35,7 @@ jobs:
       # Step 5: Commit Changes
       - name: Commit and push changes
         run: |
-          git config user.name "Draga Salt-Biter"
+          git config user.name "actions-user"
           git config user.email "actions@github.com"
           git add Website/weather.txt
           git commit -m "New Day, New Turn"
