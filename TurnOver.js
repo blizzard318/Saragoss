@@ -17,7 +17,7 @@ const token = jwt.sign({
 	exp: Math.floor(Date.now() / 1000) + (5 * 60) // Expires: Now + 5min
 }, process.env.JWT_SECRET);
 
-const response = await fetch('/API/GithubAction', {
+const response = await fetch(`${process.env.WEBSITE}/API/GithubAction`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
