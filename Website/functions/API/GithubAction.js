@@ -17,39 +17,21 @@ export async function onRequestGet(context) {
 		return new Response(JSON.stringify({ msg: 'Token is wrong' }), { status: 401 });
 	}
 
-	const characters = await context.env.Characters.list();
+    const result = await context.env.database.prepare('SELECT * FROM Actions;').all();
+	result.results
 	//TO-DO: implement pagination
 	
-	//Delete the old actions kv (no point awaiting)
-	fetch(`https://api.cloudflare.com/client/v4/accounts/${context.env.CLOUDFLARE_ID}/storage/kv/namespaces/${verifiedToken.payload.KV_ID}`, {
-	  method: 'DELETE',
-	  headers: {
-		'Authorization': `Bearer ${context.env.CLOUDFLARE_TOKEN}`
-	  }
-	});//lmao I don't really know what to do if this fails.
+	await context.env.database.prepare('DELETE FROM Actions;').all();
 	
 	//Get current date in Singapore
-	const singaporeDate = new Date().toLocaleString('en-GB', {
+	/*const singaporeDate = new Date().toLocaleString('en-GB', {
 		timeZone: 'Asia/Singapore',
 		day: '2-digit',
 		month: '2-digit',
 		year: 'numeric',
-	});
+	});*/
 
-	//Create new actions kv
-	const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${context.env.CLOUDFLARE_ID}/storage/kv/namespaces`, {
-	  method: 'POST',
-	  body: JSON.stringify({
-		  title: `Saragoss Actions ${singaporeDate}`
-	  }),
-	  headers: {
-		'Content-Type': 'application/json',
-		'Authorization': `Bearer ${context.env.CLOUDFLARE_TOKEN}`
-	  }
-	});
-	const { result } = await response.json();
-
-	return new Response(JSON.stringify({ KV_ID: result.id }),{
+	return new Response(JSON.stringify({ msg: "Completed" }),{
 		headers: { 'Content-Type': 'application/json' },
 		status: 200,
 	});
