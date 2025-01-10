@@ -4,17 +4,17 @@ import jwt from '@tsndr/cloudflare-worker-jwt';
 export async function onRequestGet(context) {  
 	const authorization = context.request.headers.get('Authorization');
 	if (!authorization) {
-		return new Response('Authorization header is missing', { status: 401 });
+		return new Response(JSON.stringify('Authorization header is missing'), { status: 401 });
 	}
 	
 	const token = authorization.split(' ')[1];
 	if (!token) {
-		return new Response('Token is missing', { status: 401 });
+		return new Response(JSON.stringify('Token is missing'), { status: 401 });
 	}
 	
 	const verifiedToken = await jwt.verify(token, context.env.JWT_SECRET, { clockTolerance: 60 });
 	if (!verifiedToken) {
-		return new Response('Token is wrong', { status: 401 });
+		return new Response(JSON.stringify('Token is wrong'), { status: 401 });
 	}
 
 	const characters = await context.env.Characters.list();
