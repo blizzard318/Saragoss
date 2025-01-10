@@ -31,6 +31,7 @@ jobs:
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           KV_ID: ${{ env.KV_ID }}
+          WEBSITE: ${{ env.WEBSITE }}
         run: node TurnOver.js
 
       # Step 5: Commit Changes
