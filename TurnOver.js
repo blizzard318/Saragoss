@@ -1,10 +1,17 @@
 import fs from 'fs';
 import path from 'path';
-import jwt from "@tsndr/cloudflare-worker-jwt";
+//import jwt from "@tsndr/cloudflare-worker-jwt";
+import jwt from "jsonwebtoken";
 
 // Why add things to the token and not to a message body?
 // Because GET requests cannot have message bodies.
-const token = await jwt.sign({
+//const token = await jwt.sign({
+	KV_ID: process.env.KV_ID,
+	nbf: Math.floor(Date.now() / 1000),      // Not before: Now
+	exp: Math.floor(Date.now() / 1000) + (5 * 60) // Expires: Now + 5min
+}, process.env.JWT_SECRET);
+
+const token = jwt.sign({
 	KV_ID: process.env.KV_ID,
 	nbf: Math.floor(Date.now() / 1000),      // Not before: Now
 	exp: Math.floor(Date.now() / 1000) + (5 * 60) // Expires: Now + 5min
