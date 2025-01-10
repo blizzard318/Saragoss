@@ -2,7 +2,7 @@ import jwt from '@tsndr/cloudflare-worker-jwt';
 //Why not make a scheduled cloudflare worker instead of this github action cronjob?
 //Because then I'll have 2 cron jobs.
 export async function onRequestGet(context) {  
-	const authorization = request.headers.get('Authorization');
+	const authorization = context.request.headers.get('Authorization');
 	if (!authorization) {
 		return new Response('Authorization header is missing', { status: 401 });
 	}
