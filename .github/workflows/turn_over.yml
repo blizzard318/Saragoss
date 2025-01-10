@@ -30,8 +30,8 @@ jobs:
       - name: Turn Over
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          KV_ID: ${{ env.KV_ID }}
-          WEBSITE: ${{ env.WEBSITE }}
+          KV_ID: ${{ vars.KV_ID }}
+          WEBSITE: ${{ vars.WEBSITE }}
         run: node TurnOver.js
 
       # Step 5: Commit Changes
