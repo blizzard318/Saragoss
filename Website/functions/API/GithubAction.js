@@ -44,7 +44,7 @@ export async function onRequestGet(context) {
 	  }),
 	  headers: {
 		'Content-Type': 'application/json',
-		'Authorization': `Bearer ${CLOUDFLARE_TOKEN}`
+		'Authorization': `Bearer ${context.env.CLOUDFLARE_TOKEN}`
 	  }
 	});
 	const { result } = await response.json();
