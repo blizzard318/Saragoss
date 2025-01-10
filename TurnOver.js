@@ -6,9 +6,9 @@ import jwt from "jsonwebtoken";
 // Why add things to the token and not to a message body?
 // Because GET requests cannot have message bodies.
 //const token = await jwt.sign({
-	KV_ID: process.env.KV_ID,
-	nbf: Math.floor(Date.now() / 1000),
-	exp: Math.floor(Date.now() / 1000) + (5 * 60)
+	'KV_ID': process.env.KV_ID,
+	'nbf': Math.floor(Date.now() / 1000),
+	'exp': Math.floor(Date.now() / 1000) + (5 * 60)
 }, process.env.JWT_SECRET);
 
 const token = jwt.sign({
