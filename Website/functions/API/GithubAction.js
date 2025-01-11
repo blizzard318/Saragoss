@@ -17,8 +17,12 @@ export async function onRequestGet(context) {
 		return new Response(JSON.stringify({ msg: 'Token is wrong' }), { status: 401 });
 	}
 
-    const result = await context.env.database.prepare('SELECT * FROM Actions;').all();
-	result.results
+ const { results } = await context.env.database.prepare('SELECT * FROM Actions;').all();
+ results.forEach((row) => {
+   const UUID = row.UUID;
+   const ship = row.Ship;
+   const action = row.Action;
+});
 	//TO-DO: implement pagination
 	
 	await context.env.database.prepare('DELETE FROM Actions;').all();
