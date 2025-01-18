@@ -13,8 +13,8 @@ export async function onRequestPut(context) { //Submit action
 const { action } = await context.request.json();
   if (!action ) return new Response("Missing Action", { status: 400 });
 
-  const ship = await ctx.env.keyvalur.get(data.user.id);
-if (!ship) return new Response("Missing Ship", { status: 400 });
+  const data = await ctx.env.Characters.get(data.user.id);
+  const ship = data.split('/')[1];
 
 const query = `
         INSERT INTO YourTableName (UUID, Ship, Action)
@@ -25,7 +25,7 @@ const query = `
       `;
       const params = [uuid, ship, action];
 
-      const result = await env.DB.prepare(query).bind(...params).run();
+      const result = await env.database.prepare(query).bind(...params).run();
 
   
 
