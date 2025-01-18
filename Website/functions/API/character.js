@@ -16,7 +16,7 @@ export async function onRequestGet(context) { //Get Character
     uuid = data.user.id;
   }
   
-  const character = await ctx.env.keyvalue.get(uuid);
+  const character = await ctx.env.Characters.get(uuid);
   if (ship) {
     const [...data] = character.split(',');
     const name = data[1];
@@ -53,7 +53,7 @@ export async function onRequestPut(context) { //Create Character
   const CreationDate = [Year, Month, Day].join('-');
   
   const ToUpload = [CreationDate, name, ship].join(',');
-  await ctx.env.keyvalue.put(data.user.id, ToUpload);
+  await ctx.env.Characters.put(data.user.id, ToUpload);
   
   return new Response(JSON.stringify({ message: 'Create Successful' }), {
     headers: { 'Content-Type': 'application/json' },
