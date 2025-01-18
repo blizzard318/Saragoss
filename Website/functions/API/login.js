@@ -16,7 +16,7 @@ export async function onRequestPost(context) { //Register or login
 
       let name = null;
       let ship = null;
-      const character = await ctx.env.keyvalue.get(data.user.id);
+      const character = await ctx.env.Characters.get(data.user.id);
       if (character){
         const [...details] = character.split(',');
         name = details[1];
