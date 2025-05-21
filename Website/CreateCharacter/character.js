@@ -39,6 +39,13 @@ if (sessionStorage.getItem("name")){
 
 async function CreateCharacter(){
 	const name = document.getElementById('char-name').value;
+	
+	if (name === "")
+	{
+		document.getElementById('incomplete').style.display = "block";
+		return;
+	}
+	
 	const ship = document.getElementById('ShipDropdown').value;
 	
 	const response = await fetch('/API/character', {
@@ -51,9 +58,9 @@ async function CreateCharacter(){
 		case 401:
 			window.location.replace("../Login");
 			break;
-		case 400:
+		case 404:
 			document.getElementById('incomplete').style.display = 'block';
-		break;
+			break;
 		case 200: //successful change
 			sessionStorage.setItem("name", name);
 			sessionStorage.setItem("ship", ship);

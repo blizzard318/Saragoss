@@ -1,15 +1,15 @@
 function toggle() {
-  const x = document.getElementById("register");
-  const y = document.getElementById("login");
+  const register = document.getElementById("register");
+  const login = document.getElementById("login");
   
   document.getElementById('login-email').value = document.getElementById('login-pw').value = document.getElementById('reg-pw').value = document.getElementById('reg-rpw').value = document.getElementById('reg-email').value = "";
   
-  if (x.style.display === "none") {
-    x.style.display = "block";
-    y.style.display = "none";
+  if (register.style.display === "none") {
+    register.style.display = "block";
+    login.style.display = "none";
   } else {
-    x.style.display = "none";
-    y.style.display = "block";
+    register.style.display = "none";
+    login.style.display = "block";
   }
 }
 async function login() {

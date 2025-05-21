@@ -17,7 +17,7 @@ export async function onRequestGet(context) { //Get Character
   }
   
   const character = await ctx.env.Characters.get(uuid);
-  if (ship) {
+  if (character) {
     const [...data] = character.split(',');
     const name = data[1];
     const ship = data[2];
