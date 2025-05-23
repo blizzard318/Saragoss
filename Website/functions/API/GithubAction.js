@@ -17,15 +17,73 @@ export async function onRequestGet(context) {
 		return new Response(JSON.stringify({ msg: 'Token is wrong' }), { status: 401 });
 	}
 
- const { results } = await context.env.database.prepare('SELECT * FROM Actions;').all();
- results.forEach((row) => {
-   const UUID = row.UUID;
-   const ship = row.Ship;
-   const action = row.Action;
-});
+	const ShipsData = await context.env.DB.prepare(`SELECT Race, Health, Wood, Food, Manpower FROM Ships`).all();
+	
+	const Ships = {};
+	ShipsData.results.forEach(({ Race, Health, Wood, Food, Manpower }) => {
+		Ships[Race] = { Health, Wood, Food, Manpower };
+	});
+
+	const resp = await context.env.ASSETS.fetch('meta.json');
+	const meta = await resp.json(); 
+
+	const result = await context.env.database.prepare(`
+						SELECT Ship, Action, COUNT(*) AS action_count
+						FROM Actions
+						GROUP BY Ship, Action
+					`).all();
+	
+	//first pass
+	result.results.forEach((row) => {
+		switch (row.Action) {
+		  case 'repair':
+			if (Ships[row.Ship].Wood <= 0) row.action_count = 0;
+			break;
+		  case 'fish':
+			if (Ships[row.Ship].Food >= meta.MaxFood) row.action_count = 0;
+			break;
+		  case 'salvage':
+			if (Ships[row.Ship].Wood >= meta.MaxWood) row.action_count = 0;
+			break;
+		}
+	  });
+	//second pass
+	result.results.forEach(({ Ship, Action, action_count }) => {
+		switch (Action) {
+			case 'repair':
+				break;
+			case 'fish':
+				break;
+			case 'salvage':
+				break;
+			case 'raid':
+				break;
+		}
+		
+		console.log(`${Ship} performed ${Action} ${action_count} times.`);
+	});
+
+
+	const { results } = await context.env.database.prepare('SELECT UUID, Action FROM Actions;').all();
+	 
+	const bulkData = results.map(row => ({
+		key: row.UUID,
+		value: row.Action,
+		expiration_ttl: 86400 // Optional: Auto-expire after 24 hours
+	}));
+
+	await fetch(`https://api.cloudflare.com/client/v4/accounts/${context.env.CLOUDFLARE_ID}/storage/kv/namespaces/${context.env.CLOUDFLARE_KV_PREVIOUS_ACTIONS}/bulk`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+			'X-Auth-Email': context.env.CLOUDFLARE_EMAIL,
+			'X-Auth-Key'  : context.env.CLOUDFLARE_TOKEN
+		},
+		body: JSON.stringify(bulkData)
+	});
 	//TO-DO: implement pagination
 	
-	await context.env.database.prepare('DELETE FROM Actions;').all();
+	await context.env.database.prepare('DELETE FROM Actions;').run();
 	
 	//Get current date in Singapore
 	/*const singaporeDate = new Date().toLocaleString('en-GB', {

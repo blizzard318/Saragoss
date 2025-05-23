@@ -10,6 +10,7 @@
 	<link rel='stylesheet' href='style.css'>
 	<link rel='shortcut icon' href='../favicon.ico'>
 	<script src='../darkmode.js'></script>
+	<script src='action.js'></script>
 </head>
 
 <body>
@@ -19,11 +20,15 @@
 </span>
 
     <div class="clearfix">
-		<button type="button" class="bluebtn" onclick="repair()">Stay and Repair Ship (Uses Wood)</button>
-		<button type="button" class="bluebtn" onclick="fish()">Stay and Fish (Gains Food)</button>
+		<br/>
+		Each turn, the ship rots a little bit, decreasing its health.
+		Each action, costs 1 Food. Except Fishing, which costs 0 Food, you are assumed to be able to feed yourself.
+		<br/>
+		<button type="button" class="bluebtn" onclick="DoAction('repair')">Stay and Repair Ship (Uses Wood)</button>
+		<button type="button" class="bluebtn" onclick="DoAction('fish')">Stay and Fish (Gains Food)</button>
 		<hr/>
-		<button type="button" class="greenbtn" onclick="salvage()">Go Out and Salvage (Gains Wood)</button>
-		<button type="button" class="greenbtn" onclick="raid()">Go Out and Raid (Attack Others, Gain Wood/Food)</button>
+		<button type="button" class="greenbtn" onclick="DoAction('salvage')">Go Out and Salvage (Gains Wood)</button>
+		<button type="button" class="greenbtn" onclick="DoAction('raid')">Go Out and Raid (Attack Others, Gain Wood/Food)</button>
     </div>
 
 <br/><br/><br/><i style='font-size:10px;line-height:0'>Disclaimer: The registered trademarks and other intellectual property related to Ravenloft and owned by TSR, Arthaus, White Wolf SSI and/or Wizards of the Coast are used for the purpose of identification only. This site is not affiliated with/or endorsed by these manufacturers.</i>

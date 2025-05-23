@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', async (event) => {
-	const csvresponse = await fetch('../ships.csv');
-
-	if (csvresponse.ok){
+	const csvresponse = await fetch('../races.csv');
 	const csvText = await csvresponse.text();
 	const [...data] = csvText.split(',');
 
@@ -13,7 +11,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 	  option.value = option.textContent = value;
 	  dropdown.appendChild(option);
 	});
- }
 
 if (sessionStorage.getItem("name")){
   document.getElementById('char-name').value = sessionStorage.getItem("name");
