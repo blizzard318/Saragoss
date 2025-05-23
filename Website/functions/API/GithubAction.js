@@ -17,12 +17,6 @@ export async function onRequestGet(context) {
 		return new Response(JSON.stringify({ msg: 'Token is wrong' }), { status: 401 });
 	}
 
-	const ShipsData = await context.env.DB.prepare(`SELECT Race, Health, Wood, Food, Manpower FROM Ships`).all();
-	
-	const Ships = {};
-	ShipsData.results.forEach(({ Race, Health, Wood, Food, Manpower }) => {
-		Ships[Race] = { Health, Wood, Food, Manpower };
-	});
  let resp = await context.env.ASSETS.fetch('ships.json');
 	const Ships = await resp.json(); 
 
