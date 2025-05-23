@@ -1,0 +1,38 @@
+{
+  "human": {
+    "wood": 100,
+    "food": 100,
+    "health": 100,
+    "manpower": 0
+  },
+  "elf": {
+    "wood": 100,
+    "food": 100,
+    "health": 100,
+    "manpower": 0
+  },
+  "dwarf": {
+    "wood": 100,
+    "food": 100,
+    "health": 100,
+    "manpower": 0
+  },
+  "gnome": {
+    "wood": 100,
+    "food": 100,
+    "health": 100,
+    "manpower": 0
+  },
+  "halfling": {
+    "wood": 100,
+    "food": 100,
+    "health": 100,
+    "manpower": 0
+  },
+  "minotaur": {
+    "wood": 100,
+    "food": 100,
+    "health": 100,
+    "manpower": 0
+  }
+}
