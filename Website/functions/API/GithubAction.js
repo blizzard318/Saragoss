@@ -23,8 +23,10 @@ export async function onRequestGet(context) {
 	ShipsData.results.forEach(({ Race, Health, Wood, Food, Manpower }) => {
 		Ships[Race] = { Health, Wood, Food, Manpower };
 	});
+ let resp = await context.env.ASSETS.fetch('ships.json');
+	const Ships = await resp.json(); 
 
-	const resp = await context.env.ASSETS.fetch('meta.json');
+	resp = await context.env.ASSETS.fetch('meta.json');
 	const meta = await resp.json(); 
 
 	const result = await context.env.database.prepare(`
@@ -47,6 +49,7 @@ export async function onRequestGet(context) {
 			break;
 		}
 	  });
+
 	//second pass
 	result.results.forEach(({ Ship, Action, action_count }) => {
 		switch (Action) {
