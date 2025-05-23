@@ -9,7 +9,7 @@ const token = jwt.sign({
 	exp: Math.floor(Date.now() / 1000) + (5 * 60) // Expires: Now + 5min
 }, process.env.JWT_SECRET);
 
-await fetch(`${process.env.WEBSITE}/API/GithubAction`, {
+const resp = await fetch(`${process.env.WEBSITE}/API/GithubAction`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
@@ -17,14 +17,15 @@ await fetch(`${process.env.WEBSITE}/API/GithubAction`, {
   },
 });
 
-const weatherOptions = ["Cold", "Foggy", "Hot", "Stormy", "Windy", "Calm"];
-const weatherData = weatherOptions[Math.floor(Math.random() * weatherOptions.length)];
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
-const filePath = path.join(__dirname, "Website/weather.txt");
-
-// Ensure the directory exists
+let filePath = path.join(__dirname, "Website/ships.json");
 fs.mkdirSync(path.dirname(filePath), { recursive: true });
+const Ships = await resp.json();
+fs.writeFileSync(filePath, JSON.stringify(Ships,null,2));
 
-// Write weather data to the file
+const weatherOptions = ["Cold", "Foggy", "Hot", "Stormy", "Windy", "Calm"];
+const weatherData = weatherOptions[Math.floor(Math.random() * weatherOptions.length)];
+filePath = path.join(__dirname, "Website/weather.txt");
+fs.mkdirSync(path.dirname(filePath), { recursive: true });
 fs.writeFileSync(filePath, weatherData);
