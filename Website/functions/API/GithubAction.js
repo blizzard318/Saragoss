@@ -29,7 +29,7 @@ export async function onRequestGet(context) {
 						GROUP BY Ship, Action
 					`).all();
 	
-	//first pass
+	//first pass, invalidate invalid actions
 	result.results.forEach((row) => {
 		switch (row.Action) {
 		  case 'repair':
@@ -44,7 +44,7 @@ export async function onRequestGet(context) {
 		}
 	  });
 
-	//second pass
+	//second pass, fulfil actions
 	result.results.forEach(({ Ship, Action, action_count }) => {
 		switch (Action) {
 			case 'repair':
