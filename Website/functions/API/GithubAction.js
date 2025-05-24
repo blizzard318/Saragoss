@@ -29,10 +29,13 @@ export async function onRequestGet(context) {
 						GROUP BY Ship, Action
 					`).all();
 	
+const Defense = {};
+const Offense = {};
 	//first pass, invalidate invalid actions
 	result.results.forEach((row) => {
 		switch (row.Action) {
 		  case 'repair':
+  Defense[row.Ship] += row.action_count;
 			if (Ships[row.Ship].Wood <= 0) row.action_count = 0;
 			break;
 		  case 'fish':
@@ -41,6 +44,8 @@ export async function onRequestGet(context) {
 		  case 'salvage':
 			if (Ships[row.Ship].Wood >= meta.MaxWood) row.action_count = 0;
 			break;
+    default:
+   break;
 		}
 	  });
 
