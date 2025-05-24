@@ -1,3 +1,21 @@
+document.addEventListener('DOMContentLoaded', async (event) => {
+const csvresponse = await fetch('../ships.csv');
+	const csvText = await csvresponse.text();
+	const [...ships] = csvText.split(',');
+const raidContainer = document.getElementById("raid-buttons");
+
+// Loop through races and create buttons dynamically
+ships.forEach(ship => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "greenbtn";
+    button.textContent = `Go Out and Raid (${ship})`;
+    button.onclick = () => DoAction(`raid-${ship.toLowerCase()}`); // Action format: raid-human, raid-elf, etc.
+    
+    raidContainer.appendChild(button); // Add button to the div
+});
+});
+
 async function DoAction(action) {
 	const response = await fetch('/API/action', {
 	  method: 'POST',
