@@ -1,5 +1,18 @@
 {
-	"MaxHealth": 100,
-	"MaxFood": 100,
-	"MaxWood": 100
+  "MaxHealth": 100,
+  "MaxFood": 100,
+  "MaxWood": 100,
+  "Races": [
+    "Human",
+    "Elf",
+    "Dwarf",
+    "Gnome",
+    "Halfling",
+    "Minotaur"
+  ],
+  "Ships": [
+    "Sea Wolf",
+    "Zombie",
+    "Abandoned"
+  ]
 }
