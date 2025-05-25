@@ -10,7 +10,7 @@ ships.forEach(ship => {
     button.type = "button";
     button.className = "greenbtn";
     button.textContent = `Go Out and Raid (${ship})`;
-    button.onclick = () => DoAction(`raid-${ship}`); // Action format: raid-human, raid-elf, etc.
+    button.onclick = () => DoAction(`raid:${ship}`); // Action format: raid-human, raid-elf, etc.
     
     raidContainer.appendChild(button); // Add button to the div
 });
