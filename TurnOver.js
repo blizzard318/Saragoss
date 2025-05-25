@@ -9,7 +9,7 @@ const token = jwt.sign({
 	exp: Math.floor(Date.now() / 1000) + (5 * 60) // Expires: Now + 5min
 }, process.env.JWT_SECRET);
 
-const resp = await fetch(`${process.env.WEBSITE}/API/GithubAction`, {
+const resp = await fetch(`${process.env.WEBSITE}/API/ResolveTurn`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
