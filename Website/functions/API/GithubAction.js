@@ -17,7 +17,7 @@ export async function onRequestGet(context) {
 		return new Response(JSON.stringify({ msg: 'Token is wrong' }), { status: 401 });
 	}
 
- let resp = await context.env.ASSETS.fetch('ships.json');
+ let resp = await context.env.ASSETS.fetch('current.json');
 	const Ships = await resp.json(); 
 
 	resp = await context.env.ASSETS.fetch('meta.json');
@@ -94,6 +94,9 @@ const Offense = {};
 		month: '2-digit',
 		year: 'numeric',
 	});*/
+
+const weatherOptions = ["Cold", "Foggy", "Hot", "Stormy", "Windy", "Calm"];
+const weatherData = weatherOptions[Math.floor(Math.random() * weatherOptions.length)];
 
 	return new Response(JSON.stringify({ msg: "Completed" }),{
 		headers: { 'Content-Type': 'application/json' },
