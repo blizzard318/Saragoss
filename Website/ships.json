@@ -1,35 +1,36 @@
 {
-  "human": {
+  "Zombies":100,
+  "Human": {
     "wood": 100,
     "food": 100,
     "health": 100,
     "manpower": 0
   },
-  "elf": {
+  "Elf": {
     "wood": 100,
     "food": 100,
     "health": 100,
     "manpower": 0
   },
-  "dwarf": {
+  "Dwarf": {
     "wood": 100,
     "food": 100,
     "health": 100,
     "manpower": 0
   },
-  "gnome": {
+  "Gnome": {
     "wood": 100,
     "food": 100,
     "health": 100,
     "manpower": 0
   },
-  "halfling": {
+  "Halfling": {
     "wood": 100,
     "food": 100,
     "health": 100,
     "manpower": 0
   },
-  "minotaur": {
+  "Minotaur": {
     "wood": 100,
     "food": 100,
     "health": 100,
