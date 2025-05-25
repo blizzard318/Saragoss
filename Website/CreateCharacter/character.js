@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', async (event) => {
-	const csvresponse = await fetch('../races.csv');
-	const csvText = await csvresponse.text();
-	const [...data] = csvText.split(',');
+	const response = await fetch('../meta.json');
+	const data = await response.json();
 
 	const dropdown = document.getElementById('ShipDropdown');
 	dropdown.innerHTML = '';
 
-	data.forEach((value) => {
+	data.Races.forEach((value) => {
 	  const option = document.createElement('option');
 	  option.value = option.textContent = value;
 	  dropdown.appendChild(option);
