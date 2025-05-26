@@ -1,39 +1,42 @@
 {
-  "Zombies":100,
-  "Human": {
-    "wood": 100,
-    "food": 100,
-    "health": 100,
-    "manpower": 0
-  },
-  "Elf": {
-    "wood": 100,
-    "food": 100,
-    "health": 100,
-    "manpower": 0
-  },
-  "Dwarf": {
-    "wood": 100,
-    "food": 100,
-    "health": 100,
-    "manpower": 0
-  },
-  "Gnome": {
-    "wood": 100,
-    "food": 100,
-    "health": 100,
-    "manpower": 0
-  },
-  "Halfling": {
-    "wood": 100,
-    "food": 100,
-    "health": 100,
-    "manpower": 0
-  },
-  "Minotaur": {
-    "wood": 100,
-    "food": 100,
-    "health": 100,
-    "manpower": 0
+  "Weather": "Calm",
+  "Zombies": 100,
+  "Ships": {
+    "Human": {
+      "Wood": 100,
+      "Food": 100,
+      "Health": 100,
+      "Manpower": 0
+    },
+    "Elf": {
+      "Wood": 100,
+      "Food": 100,
+      "Health": 100,
+      "Manpower": 0
+    },
+    "Dwarf": {
+      "Wood": 100,
+      "Food": 100,
+      "Health": 100,
+      "Manpower": 0
+    },
+    "Gnome": {
+      "Wood": 100,
+      "Food": 100,
+      "Health": 100,
+      "Manpower": 0
+    },
+    "Halfling": {
+      "Wood": 100,
+      "Food": 100,
+      "Health": 100,
+      "Manpower": 0
+    },
+    "Minotaur": {
+      "Wood": 100,
+      "Food": 100,
+      "Health": 100,
+      "Manpower": 0
+    }
   }
 }

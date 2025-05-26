@@ -19,13 +19,7 @@ const resp = await fetch(`${process.env.WEBSITE}/API/ResolveTurn`, {
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
-let filePath = path.join(__dirname, "Website/ships.json");
+const filePath = path.join(__dirname, "Website/ships.json");
 fs.mkdirSync(path.dirname(filePath), { recursive: true });
 const Ships = await resp.json();
 fs.writeFileSync(filePath, JSON.stringify(Ships,null,2));
-
-const weatherOptions = ["Cold", "Foggy", "Hot", "Stormy", "Windy", "Calm"];
-const weatherData = weatherOptions[Math.floor(Math.random() * weatherOptions.length)];
-filePath = path.join(__dirname, "Website/weather.txt");
-fs.mkdirSync(path.dirname(filePath), { recursive: true });
-fs.writeFileSync(filePath, weatherData);

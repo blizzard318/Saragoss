@@ -3,22 +3,22 @@ import jwt from '@tsndr/cloudflare-worker-jwt';
 //Because then I'll have 2 cron jobs.
 export async function onRequestGet(context) {  
 	const authorization = context.request.headers.get('Authorization');
-	if (!authorization) {
+	if (!authorization) 
 		return new Response(JSON.stringify({ msg: 'Authorization header is missing' }), { status: 401 });
-	}
+	
 	
 	const token = authorization.split(' ')[1];
-	if (!token) {
+	if (!token) 
 		return new Response(JSON.stringify({ msg: 'Token is missing' }), { status: 401 });
-	}
+	
 	
 	const verifiedToken = await jwt.verify(token, context.env.JWT_SECRET, { clockTolerance: 60 });
-	if (!verifiedToken) {
+	if (!verifiedToken) 
 		return new Response(JSON.stringify({ msg: 'Token is wrong' }), { status: 401 });
-	}
+	
 
- let resp = await context.env.ASSETS.fetch('current.json');
-	const Ships = await resp.json(); 
+ 	let resp = await context.env.ASSETS.fetch('current.json');
+	const CurrentTurn = await resp.json(); 
 
 	resp = await context.env.ASSETS.fetch('meta.json');
 	const meta = await resp.json(); 
@@ -29,45 +29,66 @@ export async function onRequestGet(context) {
 						GROUP BY Ship, Action
 					`).all();
 	
-const Defense = {};
-const Offense = {};
-	//first pass, invalidate invalid actions
+
+	//Gotta factor weather into these
+	const FoodMultiplier = (Math.random() * (2 - 1.1)) + 1.1;
+	const WoodMultiplier = (Math.random() * (2 - 1.1)) + 1.1;
+
+	const Damage = {};
+	const Raiding = {};
+	const Repairs = {};
+	//first pass
 	result.results.forEach((row) => {
 		switch (row.Action) {
 		  case 'repair':
-  Defense[row.Ship] += row.action_count;
-			if (Ships[row.Ship].Wood <= 0) row.action_count = 0;
+  			Damage[row.Ship] -= row.action_count;
+			CurrentTurn.Ships[row.Ship].Food -= row.action_count;
+			Repairs[row.Ship] += row.action_count;
 			break;
-		  case 'fish':
-			if (Ships[row.Ship].Food >= meta.MaxFood) row.action_count = 0;
+		  case 'fish': //Fishers feed selves, can overfish but cannot get more fish than limit
+  			Damage[row.Ship] -= row.action_count;
+			CurrentTurn.Ships[row.Ship].Food += row.action_count * FoodMultiplier;
 			break;
-		  case 'salvage':
-			if (Ships[row.Ship].Wood >= meta.MaxWood) row.action_count = 0;
+		  case 'salvage': //can over-salvage but cannot get more wood than limit
+			CurrentTurn.Ships[row.Ship].Food -= row.action_count;
+			CurrentTurn.Ships[row.Ship].Wood += row.action_count * WoodMultiplier;
 			break;
-    default:
-   break;
+		default:
+			if (row.Action.includes('raid')) {
+				const ToAtk = row.Action.split(':')[1];
+				Damage[ToAtk] += row.action_count;
+				Raiding[row.Ship] += row.action_count;
+				CurrentTurn.Ships[row.Ship].Food -= row.action_count;
+				row.action_count = 0;
+			}
+			else row.action_count = 0;
+			break;
 		}
 	  });
+	  result.results = result.results.filter(row => row.action_count != 0);
 
-	//second pass, fulfil actions
-	result.results.forEach(({ Ship, Action, action_count }) => {
-		switch (Action) {
-			case 'repair':
-				break;
-			case 'fish':
-				break;
-			case 'salvage':
-				break;
-			case 'raid':
-				break;
-		}
+	//Gotta factor weather into these
+	const FoodRot = (Math.random() * (5 - 1)) + 1;
+	const WoodRot = (Math.random() * (5 - 1)) + 1;
+	const HealthRot = (Math.random() * (5 - 1)) + 1;
+	Object.entries(CurrentTurn.Ships).forEach(([shipName, ship]) =>
+	{
+		ship.Food -= FoodRot;
+		ship.Wood -= WoodRot;
+		ship.Health -= HealthRot;
+
+		const MissingHealth = meta.MaxHealth - ship.Health;
+		const ActualRepairs = Math.min(Repairs[shipName], MissingHealth, ship.Wood);
 		
-		console.log(`${Ship} performed ${Action} ${action_count} times.`);
+		ship.Wood -= ActualRepairs;
+		ship.Health += ActualRepairs;
+
+		if (ship.Food >= meta.MaxFood) ship.Food = meta.MaxFood;
+		if (ship.Wood >= meta.MaxWood) ship.Wood = meta.MaxWood;
+		if (ship.Health >= meta.MaxHealth) ship.Health = meta.MaxHealth;
 	});
 
-
 	const { results } = await context.env.database.prepare('SELECT UUID, Action FROM Actions;').all();
-	 
 	const bulkData = results.map(row => ({
 		key: row.UUID,
 		value: row.Action,
@@ -95,8 +116,8 @@ const Offense = {};
 		year: 'numeric',
 	});*/
 
-const weatherOptions = ["Cold", "Foggy", "Hot", "Stormy", "Windy", "Calm"];
-const weatherData = weatherOptions[Math.floor(Math.random() * weatherOptions.length)];
+	const weatherOptions = ["Cold", "Foggy", "Hot", "Stormy", "Windy", "Calm"];
+	CurrentTurn.Weather = weatherOptions[Math.floor(Math.random() * weatherOptions.length)];
 
 	return new Response(JSON.stringify({ msg: "Completed" }),{
 		headers: { 'Content-Type': 'application/json' },
