@@ -34,57 +34,89 @@ export async function onRequestGet(context) {
 	const FoodMultiplier = (Math.random() * (2 - 1.1)) + 1.1;
 	const WoodMultiplier = (Math.random() * (2 - 1.1)) + 1.1;
 
-	const Damage = {};
-	const Raiding = {};
-	const Repairs = {};
-	//first pass
+	const Raiding  = {};
+	const RaidTargets = {};
+	const Repairs  = {};
+	const Manpower = {};
 	result.results.forEach((row) => {
 		switch (row.Action) {
 		  case 'repair':
-  			Damage[row.Ship] -= row.action_count;
 			CurrentTurn.Ships[row.Ship].Food -= row.action_count;
-			Repairs[row.Ship] += row.action_count;
+            Repairs[row.Ship] = (Repairs[row.Ship] || 0) + row.action_count;
 			break;
 		  case 'fish': //Fishers feed selves, can overfish but cannot get more fish than limit
-  			Damage[row.Ship] -= row.action_count;
-			CurrentTurn.Ships[row.Ship].Food += row.action_count * FoodMultiplier;
+			CurrentTurn.Ships[row.Ship].Food += Math.floor(row.action_count * FoodMultiplier);
 			break;
 		  case 'salvage': //can over-salvage but cannot get more wood than limit
 			CurrentTurn.Ships[row.Ship].Food -= row.action_count;
-			CurrentTurn.Ships[row.Ship].Wood += row.action_count * WoodMultiplier;
+			CurrentTurn.Ships[row.Ship].Wood += Math.floor(row.action_count * WoodMultiplier);
 			break;
-		default:
+		  default:
 			if (row.Action.includes('raid')) {
-				const ToAtk = row.Action.split(':')[1];
-				Damage[ToAtk] += row.action_count;
-				Raiding[row.Ship] += row.action_count;
 				CurrentTurn.Ships[row.Ship].Food -= row.action_count;
-				row.action_count = 0;
+
+				const ToAtk = row.Action.split(':')[1];
+                // Track raiding action per attacking ship against its target
+                Raiding[row.Ship] = Raiding[row.Ship] || {};
+                Raiding[row.Ship][ToAtk] = (Raiding[row.Ship][ToAtk] || 0) + row.action_count;
+
+                // Track total attackers per targeted ship
+                RaidTargets[ToAtk] = RaidTargets[ToAtk] || {};
+                RaidTargets[ToAtk][row.Ship] = (RaidTargets[ToAtk][row.Ship] || 0) + row.action_count;
 			}
 			else row.action_count = 0;
 			break;
 		}
-	  });
-	  result.results = result.results.filter(row => row.action_count != 0);
+    	Manpower[row.Ship] = (Manpower[row.Ship] || 0) + row.action_count;
+	});
+
+	const RaidMultiplier = (Math.random() * (2.5 - 1.5)) + 1.5;
+	// Raid resolution - Only distribute loot to attacking ships that specified this target
+	Object.entries(RaidTargets).forEach(([targetShip, attackers]) => {
+		const Target = CurrentTurn.Ships[targetShip];
+
+		// Determine max lootable resources
+		const TotalRaiders = Object.values(attackers).reduce((sum, count) => sum + count, 0);
+		const MaxLootableFood = Math.min(Target.Food, TotalRaiders * RaidMultiplier);
+		const MaxLootableWood = Math.min(Target.Wood, TotalRaiders * RaidMultiplier);
+
+		Target.Food -= MaxLootableFood;
+		Target.Wood -= MaxLootableWood;
+		Target.Health -= TotalRaiders; // Apply health damage
+
+		// Distribute loot **only to ships that attacked THIS target**
+		Object.entries(attackers).forEach(([attackerShip, raiderCount]) => {
+			if (!Raiding[attackerShip][targetShip]) return;
+
+			const ShipShareFood = Math.floor(MaxLootableFood * (raiderCount / TotalRaiders));
+			const ShipShareWood = Math.floor(MaxLootableWood * (raiderCount / TotalRaiders));
+
+			// Transfer loot only to designated attackers
+			CurrentTurn.Ships[attackerShip].Food = (CurrentTurn.Ships[attackerShip].Food || 0) + ShipShareFood;
+			CurrentTurn.Ships[attackerShip].Wood = (CurrentTurn.Ships[attackerShip].Wood || 0) + ShipShareWood;
+		});
+	});
 
 	//Gotta factor weather into these
-	const FoodRot = (Math.random() * (5 - 1)) + 1;
-	const WoodRot = (Math.random() * (5 - 1)) + 1;
+	const FoodRot 	= (Math.random() * (5 - 1)) + 1;
+	const WoodRot 	= (Math.random() * (5 - 1)) + 1;
 	const HealthRot = (Math.random() * (5 - 1)) + 1;
-	Object.entries(CurrentTurn.Ships).forEach(([shipName, ship]) =>
-	{
-		ship.Food -= FoodRot;
-		ship.Wood -= WoodRot;
+	Object.entries(CurrentTurn.Ships).forEach(([shipName, ship]) => {
+		ship.Food 	-= FoodRot	;
+		ship.Wood 	-= WoodRot	;
 		ship.Health -= HealthRot;
+
+		ship.Food 	 -= Manpower[shipName];
+		ship.Manpower = Manpower[shipName];
 
 		const MissingHealth = meta.MaxHealth - ship.Health;
 		const ActualRepairs = Math.min(Repairs[shipName], MissingHealth, ship.Wood);
 		
-		ship.Wood -= ActualRepairs;
+		ship.Wood 	-= ActualRepairs;
 		ship.Health += ActualRepairs;
 
-		if (ship.Food >= meta.MaxFood) ship.Food = meta.MaxFood;
-		if (ship.Wood >= meta.MaxWood) ship.Wood = meta.MaxWood;
+		if (ship.Food 	>= meta.MaxFood	 ) ship.Food   = meta.MaxFood;
+		if (ship.Wood 	>= meta.MaxWood	 ) ship.Wood   = meta.MaxWood;
 		if (ship.Health >= meta.MaxHealth) ship.Health = meta.MaxHealth;
 	});
 

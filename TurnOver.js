@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import jwt from "jsonwebtoken";
 import { fileURLToPath } from 'url';
-//import jwt from "@tsndr/cloudflare-worker-jwt";
 
 const token = jwt.sign({
 	nbf: Math.floor(Date.now() / 1000),      // Not before: Now
@@ -16,10 +15,10 @@ const resp = await fetch(`${process.env.WEBSITE}/API/ResolveTurn`, {
     'Authorization': `Bearer ${token}`
   },
 });
+const Ships = await resp.json();
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
 const filePath = path.join(__dirname, "Website/ships.json");
 fs.mkdirSync(path.dirname(filePath), { recursive: true });
-const Ships = await resp.json();
 fs.writeFileSync(filePath, JSON.stringify(Ships,null,2));
