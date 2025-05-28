@@ -80,9 +80,9 @@ export async function onRequestGet(context) {
 		const MaxLootableFood = Math.min(Target.Food, TotalRaiders * RaidMultiplier);
 		const MaxLootableWood = Math.min(Target.Wood, TotalRaiders * RaidMultiplier);
 
-		Target.Food -= MaxLootableFood;
-		Target.Wood -= MaxLootableWood;
-		Target.Health -= TotalRaiders; // Apply health damage
+		Target.Food   -= MaxLootableFood;
+		Target.Wood   -= MaxLootableWood;
+		Target.Health -= TotalRaiders	;
 
 		// Distribute loot **only to ships that attacked THIS target**
 		Object.entries(attackers).forEach(([attackerShip, raiderCount]) => {
